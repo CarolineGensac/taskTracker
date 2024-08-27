@@ -57,11 +57,12 @@ Ceci est une application simple de TodoList construite avec React pour le fronte
    ```bash
    npm install
    ```
-6. Créez un fichier .env dans le répertoire backend et ajoutez-y les informations suivantes
+6. Créez un fichier .env dans le répertoire backend et ajoutez-y les informations que je vous ai fournies
 
+ex : 
  ```bash
-MONGO_URL=mongodb://localhost:27017/ToDoApp
-PORT=8080
+MONGODB_URL=mongodb+srv://NomDuUser:motdepasse@cluster0.rgfrt.mongodb.net/ToDoApp?
+retryWrites=true&w=majority&appName=Cluster
  ```
 
    
