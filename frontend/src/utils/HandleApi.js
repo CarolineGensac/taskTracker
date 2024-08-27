@@ -2,6 +2,7 @@ import axios from 'axios'
 
 const baseUrl = "http://localhost:8080"
 
+
 const getAllToDo = (setToDo) => {
   axios
   .get(baseUrl)
@@ -12,4 +13,17 @@ const getAllToDo = (setToDo) => {
   
 }
 
-export {getAllToDo}
+const addToDo = (text, setText, setToDo) => {
+
+  axios
+  .post(`${baseUrl}/save`, {text})
+  .then((data) => {
+    console.log(data); 
+    setText("")
+    getAllToDo(setToDo)
+  })
+  .catch((err) => console.log(err))
+}
+
+
+export {getAllToDo, addToDo}

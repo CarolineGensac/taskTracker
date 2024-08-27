@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
 import ToDo from "./components/ToDo";
 
-import { getAllToDo } from "./utils/HandleApi";
+import { addToDo, getAllToDo } from "./utils/HandleApi";
 
 function App() {
 
   const [toDo, setToDo] = useState([]);
+  const [text, setText] = useState("");
 
   
   useEffect(() => {
@@ -23,10 +24,12 @@ function App() {
           <input
             type="text"
             placeholder="What do you need to do ? "
+            value={text}
+            onChange={(e) => setText(e.target.value)}
           />
 
            <div
-            className="add">    </div>
+            className="add"  onClick={() => addToDo(text, setText,setToDo)}> App</div>
           </div>
 
           <div className="list">
@@ -34,8 +37,6 @@ function App() {
             <ToDo
               key={item._id}
               text={item.text}
-              // updateMode={() => updateMode(item._id, item.text)}
-              // deleteToDo={() => deleteToDo(item._id, setToDo)}
             />
           ))}
 
