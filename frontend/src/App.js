@@ -1,17 +1,25 @@
 import { useEffect, useState } from "react";
 import ToDo from "./components/ToDo";
 
-import { addToDo, getAllToDo } from "./utils/HandleApi";
+import { addToDo, getAllToDo, updateToDo } from "./utils/HandleApi";
 
 function App() {
 
   const [toDo, setToDo] = useState([]);
   const [text, setText] = useState("");
-
+  const [isUpdating, setIsUpdating] = useState(false);
+  const [toDoId, setToDoId] = useState("");
   
   useEffect(() => {
     getAllToDo(setToDo);
   }, []);
+
+  
+  const updateMode = (_id, text) => {
+    setIsUpdating(true);
+    setText(text);
+    setToDoId(_id);
+  };
 
   return (
     <div className="App">
@@ -29,7 +37,17 @@ function App() {
           />
 
            <div
-            className="add"  onClick={() => addToDo(text, setText,setToDo)}> App</div>
+            className="add"  
+            onClick={
+              isUpdating
+              ? () =>
+                  updateToDo(toDoId, text, setToDo, setText, setIsUpdating)
+              : () => addToDo(text, setText, setToDo)
+          }
+        >
+          {/* changement du bouton si l'on met à jour ou si on créé une tâche */}
+          {isUpdating ? "Update" : "Add"} 
+          </div>
           </div>
 
           <div className="list">
@@ -37,6 +55,7 @@ function App() {
             <ToDo
               key={item._id}
               text={item.text}
+              updateMode={() => updateMode(item._id, item.text)}
             />
           ))}
 
